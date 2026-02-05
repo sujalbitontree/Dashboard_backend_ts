@@ -22,7 +22,7 @@ export const signupSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
   confirmPassword: z.string(), 
-  age: z.coerce.number().min(5).max(80),
+  age: z.coerce.number().min(5,'Age must be at least 5').max(80,'Age must be at most 80'),
   gender: z.string().min(1, "Gender is required")
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords do not match",

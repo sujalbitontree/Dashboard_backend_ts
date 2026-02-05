@@ -33,10 +33,12 @@ export const signin = async (
       message:"Sign in successful",
       data: { accessToken },
     })
-  } catch (error: any) {
-   return res.status(400).json({
-      success: false,
-      message: error.message,
-    })
+  } catch (error: unknown) {
+   const message = error instanceof Error ? error.message : "An unexpected error occurred";
+
+  return res.status(404).json({
+    success: false,
+    message: message,
+  })
   }
 };

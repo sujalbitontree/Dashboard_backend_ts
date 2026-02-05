@@ -1,16 +1,14 @@
 import { query } from "../../db";
+import { CREATE_USER } from "../../db/Queries/queries";
+import { User } from "../../types/user";
 import { SignupSchema } from "../../utils/validations/signupSchema";
 
 type SignupInput = Omit<SignupSchema,'confirmPassword'>
-export const create = async (userData : SignupInput) => {
+export const create = async (userData : SignupInput):Promise<User | null> => {
   const { username, password, email, age, gender } = userData
-  const sql = `
-        INSERT INTO users (username, password_hash, email, age, gender)
-        VALUES ($1, $2, $3, $4, $5)
-        RETURNING id, username, email, created_at;
-    `
+  
   const values = [username, password, email, age, gender]
-  const { rows } = await query(sql, values)
+  const { rows } = await query(CREATE_USER, values)
   console.log(query)
   return rows[0]
 }
