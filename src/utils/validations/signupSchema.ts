@@ -1,9 +1,11 @@
 import { z } from 'zod';
 
-
-const emailSchema = z.string().email({
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+export const emailSchema = z.email({
+  pattern: emailRegex,
   message: 'Invalid email format',
-});
+})
+
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$/;
 
