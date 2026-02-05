@@ -14,3 +14,6 @@ pool.on("error",(err)=>{
     console.log(`Database Connection error ${err}`);
     process.exit(-1)
 })
+
+export const query = (text : string, params:any[]) => pool.query(text, params);
+export default pool;
