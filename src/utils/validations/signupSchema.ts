@@ -9,7 +9,7 @@ export const emailSchema = z.email({
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$/;
 
-const passwordSchema = z
+export const passwordSchema = z
   .string()
   .min(8, { message: 'Password must be at least 8 characters long' }) 
   .max(14, { message: 'Password must be at most 14 characters long' })
