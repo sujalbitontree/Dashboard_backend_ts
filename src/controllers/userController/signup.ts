@@ -26,10 +26,12 @@ export const signup = async (
       message: 'User created successfully',
       data: user,
     });
-  } catch (error: any) {
-    return res.status(400).json({
-      success: false,
-      message: error.message || 'An unexpected error occurred',
-    });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An unexpected error occurred";
+
+  return res.status(400).json({
+    success: false,
+    message: message,
+  })
   }
 };
