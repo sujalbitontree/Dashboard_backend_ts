@@ -5,5 +5,8 @@ export interface User{
     password_hash : string,
     created_at:Date,
     age? : Number,
-    gender? : string
+    gender? : string,
+    reset_password_expiry : string ,
+    reset_password_token : string
+
 }
