@@ -1,19 +1,19 @@
-import { Pool } from "pg";
+import { Pool } from 'pg'
 import dotenv from 'dotenv'
 dotenv.config()
 
 export const pool = new Pool({
-    connectionString : process.env.DB_URL
+  connectionString: process.env.DB_URL,
 })
 
-pool.on("connect",()=>{
-    console.log(`Database Connected`);
+pool.on('connect', () => {
+  console.log(`Database Connected`)
 })
 
-pool.on("error",(err)=>{
-    console.log(`Database Connection error ${err}`);
-    process.exit(-1)
+pool.on('error', (err) => {
+  console.log(`Database Connection error ${err}`)
+  process.exit(-1)
 })
 
-export const query = (text : string, params:any[]) => pool.query(text, params);
-export default pool;
+export const query = (text: string, params: any[]) => pool.query(text, params)
+export default pool

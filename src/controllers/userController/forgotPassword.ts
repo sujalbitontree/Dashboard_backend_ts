@@ -2,9 +2,7 @@ import { Request, Response } from 'express'
 import { z } from 'zod'
 import { emailSchema } from '../../utils/validations/signupSchema'
 import { forgotPassword } from '../../services/userServices/forgotPassword'
-type ForgotPasswordBody = {
-  email: z.infer<typeof emailSchema>
-}
+
 
 export const forgotpassword = async (
   req: Request,

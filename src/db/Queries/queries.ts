@@ -1,6 +1,6 @@
 export const FIND_BY_EMAIL = `SELECT * FROM users WHERE email = $1`
 
-export const CREATE_USER =  `
+export const CREATE_USER = `
         INSERT INTO users (username, password_hash, email, age, gender)
         VALUES ($1, $2, $3, $4, $5)
         RETURNING id, username, email, created_at;
@@ -8,23 +8,33 @@ export const CREATE_USER =  `
 
 export const FIND_BY_ID = `SELECT * FROM users WHERE id = $1`
 
-export const FIND_USER_BY_RESET_TOKEN = 
-              `SELECT id, password_hash, reset_password_expiry 
+export const FIND_USER_BY_RESET_TOKEN = `SELECT id, password_hash, reset_password_expiry 
                FROM users 
                WHERE reset_password_token = $1`
 
-
-export const UPDATE_RESET_TOKEN =  `
+export const UPDATE_RESET_TOKEN = `
         UPDATE users 
         SET reset_password_token = $2, reset_password_expiry = $3 
         WHERE id = $1
     `
 
-export const COMPLETE_PASSWORD_RESET = 
-`
+export const COMPLETE_PASSWORD_RESET = `
         UPDATE users 
         SET password_hash = $1, 
             reset_password_token = NULL, 
-            reset_password_expiry = NULL 
+            reset_password_expiry = NULL
         WHERE id = $2
     `
+
+export const UPDATE_PASSWORD_BY_ID = `
+    UPDATE users 
+    SET password_hash = $1 
+    WHERE id = $2
+  `
+
+export const UPDATE_USERDATA_BY_ID = `
+  UPDATE users
+  SET username = $2,
+      age = $3
+  WHERE id = $1
+`
